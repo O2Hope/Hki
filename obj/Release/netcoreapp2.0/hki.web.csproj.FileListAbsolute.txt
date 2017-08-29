@@ -1,0 +1,10 @@
+/Users/anaisabel/RiderProjects/hki/hki.web/bin/Release/netcoreapp2.0/hki.web.deps.json
+/Users/anaisabel/RiderProjects/hki/hki.web/bin/Release/netcoreapp2.0/hki.web.runtimeconfig.json
+/Users/anaisabel/RiderProjects/hki/hki.web/bin/Release/netcoreapp2.0/hki.web.runtimeconfig.dev.json
+/Users/anaisabel/RiderProjects/hki/hki.web/bin/Release/netcoreapp2.0/hki.web.dll
+/Users/anaisabel/RiderProjects/hki/hki.web/bin/Release/netcoreapp2.0/hki.web.pdb
+/Users/anaisabel/RiderProjects/hki/hki.web/obj/Release/netcoreapp2.0/hki.web.csproj.CoreCompileInputs.cache
+/Users/anaisabel/RiderProjects/hki/hki.web/obj/Release/netcoreapp2.0/hki.web.AssemblyInfoInputs.cache
+/Users/anaisabel/RiderProjects/hki/hki.web/obj/Release/netcoreapp2.0/hki.web.AssemblyInfo.cs
+/Users/anaisabel/RiderProjects/hki/hki.web/obj/Release/netcoreapp2.0/hki.web.dll
+/Users/anaisabel/RiderProjects/hki/hki.web/obj/Release/netcoreapp2.0/hki.web.pdb

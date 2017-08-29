@@ -1,0 +1,40 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/Users/anaisabel/RiderProjects/hki/hki.web/hki.web.csproj",
+    "projectName": "hki.web",
+    "projectPath": "/Users/anaisabel/RiderProjects/hki/hki.web/hki.web.csproj",
+    "outputPath": "/Users/anaisabel/RiderProjects/hki/hki.web/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netcoreapp2.0"
+    ],
+    "frameworks": {
+      "netcoreapp2.0": {
+        "projectReferences": {}
+      }
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Microsoft.AspNetCore.All": {
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Microsoft.AspNetCore.Mvc.TagHelpers": {
+          "target": "Package",
+          "version": "2.0.0"
+        },
+        "Pomelo.EntityFrameworkCore.MySql": {
+          "target": "Package",
+          "version": "2.0.0-rtm-10058"
+        }
+      }
+    }
+  }
+}
