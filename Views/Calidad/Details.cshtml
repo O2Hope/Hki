@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Calidad</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,26 +63,20 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Production</h3>
+            <h3>Calidad</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
-                <a asp-controller="Produccion" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
+                <a asp-controller="Calidad" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
               </li>
                   
-              <li><a><i class="fa fa-edit"></i> MO'S <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <li><a asp-action="NewMO">New MO</a></li>
-                  <li><a asp-action="Mos">All MO'S</a></li>
-                </ul>
+              <li>
+                <a asp-controller="Calidad" asp-action="Mos" ><i class="fa fa-edit"></i> MO'S </a>
               </li>
-              <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-bar-chart-o"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="#">Processed Units </a></li>
-                  <li><a href="#">Reworked Units</a></li>
-                  <li><a href="#">Time elapsed between status 1</a></li>
-                  <li><a href="#">Time elapsed between status 2</a></li>
-                  <li><a href="#">Day processed against scheduled day</a></li>
+                  <li><a href="#">Reporte de unidades por surtir, surtidas y completas</a></li>
+                  <li><a href="#">Reporte de tiempo transcurrido de surtir a preparado</a></li>
                 </ul>
               </li>
             </ul>
@@ -201,120 +195,152 @@
 
     <!-- page content -->
     <div class="right_col" role="main">
-      <div class="">
-        <div class="page-title">
-          <div class="title_left">
-            <h3>Edit MO</h3>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Details</h2>
-                <div class="clearfix"></div>
+
+      <!-- /Graph -->
+      <div class="row">
+
+                       <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> Details </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+             
+                    <dl class="dl-horizontal">
+                      <dt>
+                        ID
+                      </dt>
+
+                      <dd>
+                        @Model.Id
+                      </dd>
+
+                      <dt>
+                        Asignado
+                      </dt>
+
+                      <dd>
+                        @Model.Asignado
+                      </dd>
+
+                      <dt>
+                        Fecha Levantamiento
+                      </dt>
+
+                      <dd>
+                        @Model.Levantamiento
+                      </dd>
+                      <dt>
+                        Fecha Requerimiento
+                      </dt>
+
+                      <dd>
+                        @Model.FechaReq
+                      </dd>
+                      <dt>
+                        Dia
+                      </dt>
+                      <dd>
+                        @Model.Dia
+                      </dd>
+                      <dt>
+                        Producto
+                      </dt>
+                      <dd>
+                        <table class="table">
+                          <tr>
+                            <th>ID</th>
+                            <th>Descripcion</th>
+                            <th>Valor/Hrs</th>
+                          </tr>
+                          <tr>
+                            <td>
+                              @Model.ProductoId
+                            </td>
+                            <td>
+                              @Model.Descripcion
+                            </td>
+                            <td>
+                              @Model.ValorHrs
+                            </td>
+                          </tr>
+
+                        </table>
+                      </dd>
+                      <dt>
+                        Ubicacion
+                      </dt>
+                      <dd>
+                        @Model.Ubicacion
+                      </dd>
+                      <dt>
+                        Cantidad
+                      </dt>
+                      <dd>
+                        @Model.Cantidad Piezas
+                      </dd>
+                      <dt>
+                        Piezas finalizadas
+                      </dt>
+                      <dd>
+                        @Model.Finalizadas Piezas
+                      </dd>
+                      <dt>
+                        Valor Hrs.
+                      </dt>
+                      <dd>
+                        @Model.ValorHrs
+                      </dd>
+                      <dt>
+                        Total Hrs.
+                      </dt>
+                      <dd>
+                        @Model.TotalHrs
+                      </dd>
+                      <dt>
+                        Estatus 2
+                      </dt>
+                      <dd>
+                        @Model.Estatus2
+                      </dd>
+                      <dt>
+                        Estatus 3
+                      </dt>
+                      <dd>
+                        @Model.Estatus3
+                      </dd>
+                    </dl>
+							
+                    <a asp-action="Mos">Regresar</a>
+						
+                  </div>
+                </div>
               </div>
-              <div class="x_content">
-                <br />
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="Edit">
+        
+        
+      </div>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Code <span class="required">*</span>
-                    </label>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                      <input asp-for="ProductoId" readonly="readonly" required="required" class="form-control col-md-7 col-xs-12"  >
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Description 
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Descripcion" readonly="readonly"  class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Hours/Unit</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="ValorHrs" readonly="readonly" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Day For Prodution</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Dia" asp-items="Html.GetEnumSelectList<hki.web.Models.Dias>()">
-                      </select>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Demand Qty<span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Cantidad"  required="required" readonly="readonly" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
-                      </select>
-                    </div>
-                  </div>
-                 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Required Date</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <div class="input-group date" id="myDatepicker2">
-                        <input type="text" asp-for="FechaReq" class="form-control" readonly="readonly"/>
-                        <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Status 2 
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Estatus2" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Status 3 
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Estatus3" readonly="readonly" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-
-                  
-                  <div class="ln_solid"></div>
-                  <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <button class="btn btn-primary" type="reset">Reset</button>
-                      <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
-                  </div>
-
-                </form>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    </div>
-    </div>
-        
-        
+       
         <!-- /page content -->
 
         <!-- footer content -->
@@ -366,40 +392,7 @@
     <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
-  <script src="~/Board/build/js/custom.min.js"></script>
-  
-  <script src="~/Board/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-
-  <script>
-    $('#myDatepicker').datetimepicker();
-    
-    $('#myDatepicker2').datetimepicker({
-      format: 'DD/MM/YYYY'
-    });
-    
-    $('#myDatepicker3').datetimepicker({
-      format: 'hh:mm A'
-    });
-    
-    $('#myDatepicker4').datetimepicker({
-      ignoreReadonly: true,
-      allowInputToggle: true
-    });
-
-    $('#datetimepicker6').datetimepicker();
-    
-    $('#datetimepicker7').datetimepicker({
-      useCurrent: false
-    });
-    
-    $("#datetimepicker6").on("dp.change", function(e) {
-      $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-    });
-    
-    $("#datetimepicker7").on("dp.change", function(e) {
-      $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-    });
-  </script>
+    <script src="~/Board/build/js/custom.min.js"></script>
 	
   </body>
 </html>

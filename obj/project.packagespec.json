@@ -33,6 +33,10 @@
         "Pomelo.EntityFrameworkCore.MySql": {
           "target": "Package",
           "version": "2.0.0-rtm-10058"
+        },
+        "WebApiContrib.Core.Formatter.Csv": {
+          "target": "Package",
+          "version": "2.0.0"
         }
       }
     }

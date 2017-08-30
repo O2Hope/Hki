@@ -30,18 +30,20 @@ namespace hki.web.Controllers
         [HttpGet] 
         public IActionResult Index()
         {
+            if (!_signInManager.IsSignedIn(User)) return View();
+            
+            if (User.IsInRole(Roles.Almacen.ToString()))
+                return RedirectToAction("Index", "Almacen");
 
-            if (_signInManager.IsSignedIn(User))
-            {
-                if (User.IsInRole(Roles.Almacen.ToString()))
-                {
-                    return RedirectToAction("Index", "Almacen");
-                }
-                if (User.IsInRole(Roles.Produccion.ToString()))
-                {
-                    return RedirectToAction("Index", "Produccion");
-                }
-            }
+            if (User.IsInRole(Roles.Produccion.ToString()))
+                return RedirectToAction("Index", "Produccion");
+                
+            if (User.IsInRole(Roles.Calidad.ToString()))               
+                return RedirectToAction("Index", "Calidad");
+
+            if (User.IsInRole(Roles.Programacion.ToString()))
+                return RedirectToAction("Index", "Programacion");
+            
             return View();
         }
 
@@ -57,24 +59,27 @@ namespace hki.web.Controllers
                 {
 
                     if (User.IsInRole(Roles.Almacen.ToString()))
-                    {
                         return RedirectToAction("Index", "Almacen");
-                    }
+
                     if (User.IsInRole(Roles.Produccion.ToString()))
-                    {
                         return RedirectToAction("Index", "Produccion");
-                    }
+                
+                    if (User.IsInRole(Roles.Calidad.ToString()))               
+                        return RedirectToAction("Index", "Calidad");
+
+                    if (User.IsInRole(Roles.Programacion.ToString()))
+                        return RedirectToAction("Index", "Programacion");
                 }
                 else
                 {
-                    ModelState.AddModelError(String.Empty,"Los datos ingresados son incorrectos");
+                    ModelState.AddModelError(string.Empty,"Los datos ingresados son incorrectos");
                 }
             }
 
             return RedirectToAction("Index","Home");
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador, Programacion")]
         [HttpGet]
         public IActionResult SignUp()
         {

@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Calidad</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,13 @@
     <link href="~/Board/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Select2 -->
+    <link href="~/Board/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Board/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Board/vendors/starrr/dist/starrr.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="~/Board/build/css/custom.min.css" rel="stylesheet">
@@ -63,26 +70,20 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Production</h3>
+            <h3>Calidad</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
-                <a asp-controller="Produccion" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
+                <a asp-controller="Calidad" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
               </li>
                   
-              <li><a><i class="fa fa-edit"></i> MO'S <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <li><a asp-action="NewMO">New MO</a></li>
-                  <li><a asp-action="Mos">All MO'S</a></li>
-                </ul>
+              <li>
+                <a asp-controller="Calidad" asp-action="Mos" ><i class="fa fa-edit"></i> MO'S </a>
               </li>
-              <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-bar-chart-o"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="#">Processed Units </a></li>
-                  <li><a href="#">Reworked Units</a></li>
-                  <li><a href="#">Time elapsed between status 1</a></li>
-                  <li><a href="#">Time elapsed between status 2</a></li>
-                  <li><a href="#">Day processed against scheduled day</a></li>
+                  <li><a href="#">Reporte de unidades por surtir, surtidas y completas</a></li>
+                  <li><a href="#">Reporte de tiempo transcurrido de surtir a preparado</a></li>
                 </ul>
               </li>
             </ul>
@@ -245,7 +246,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Day For Prodution</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Dia" asp-items="Html.GetEnumSelectList<hki.web.Models.Dias>()">
+                      <select class="form-control" disabled="disabled" asp-for="Dia" asp-items="Html.GetEnumSelectList<hki.web.Models.Dias>()">
                       </select>
                     </div>
                   </div>
@@ -261,7 +262,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
+                      <select class="form-control" asp-for="Ubicacion" disabled="disabled"  asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
                       </select>
                     </div>
                   </div>
@@ -293,6 +294,20 @@
                       <input asp-for="Estatus3" readonly="readonly" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
+                  <div class="form-group">
+                   
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"> Terminado </label>
+                      
+                      <div class="checkbox col-md-6 col-sm-6 col-xs-12">
+
+                            <input type="checkbox" class="flat"> 
+
+                        </div>
+                        
+                   
+                   
+                      </div>
+            
 
                   
                   <div class="ln_solid"></div>
@@ -327,7 +342,8 @@
         <!-- /footer content -->
 
 
-    <!-- jQuery -->
+  
+  <!-- jQuery -->
     <script src="~/Board/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Board/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -363,7 +379,8 @@
     <script src="~/Board/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="~/Board/vendors/moment/min/moment.min.js"></script>
-    <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="../vendors/switchery/dist/switchery.min.js"></script>
 
     <!-- Custom Theme Scripts -->
   <script src="~/Board/build/js/custom.min.js"></script>

@@ -9,17 +9,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace hki.web.Controllers
 {
-    [Authorize(Roles = "Almacen, Administrador")]
-    public class AlmacenController : Controller
+    [Authorize(Roles = "Calidad, Administrador")]
+
+    public class CalidadController : Controller
     {
-        
         private readonly ApplicationDbContext _context;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AlmacenController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
+        public CalidadController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
@@ -45,6 +45,7 @@ namespace hki.web.Controllers
             return View(modelo);
         }
         
+                
         public IActionResult Mos()
         {
             var modelo = _context.Ordenes.OrderByDescending(o => o.Levantamiento).ToList();
@@ -58,7 +59,22 @@ namespace hki.web.Controllers
 
             return View(orden);
         }
+        
+        public async Task<IActionResult> Details(string id)
+        {
 
+            var orden = await _context.Ordenes
+                .SingleOrDefaultAsync(o => o.Id == id);
+
+
+            if (orden == null)
+            {
+                return NotFound();
+            }
+
+            return View(orden);
+        }
+        
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPOst(string id)
@@ -67,7 +83,7 @@ namespace hki.web.Controllers
             if (await TryUpdateModelAsync<Orden>(
                 ordenToUpdate,
                 "",
-                o => o.Dia, o => o.Ubicacion, o => o.Estatus2, o => o.Estatus3))
+                 o => o.Estatus2))
             {
                 try
                 {
@@ -87,25 +103,12 @@ namespace hki.web.Controllers
             return View();
         }
         
-        public async Task<IActionResult> Details(string id)
-        {
 
-            var orden = await _context.Ordenes
-                .SingleOrDefaultAsync(o => o.Id == id);
-
-
-            if (orden == null)
-            {
-                return NotFound();
-            }
-
-            return View(orden);
-        }
-        
         public async Task<IActionResult> Logut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        
     }
 }

@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Almacen</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,26 +63,20 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Production</h3>
+            <h3>Almacen</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
-                <a asp-controller="Produccion" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
+                <a asp-controller="Almacen" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
               </li>
                   
-              <li><a><i class="fa fa-edit"></i> MO'S <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <li><a asp-action="NewMO">New MO</a></li>
-                  <li><a asp-action="Mos">All MO'S</a></li>
-                </ul>
+              <li>
+                <a asp-controller="Almacen" asp-action="Mos" ><i class="fa fa-edit"></i> MO'S </a>
               </li>
-              <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-bar-chart-o"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="#">Processed Units </a></li>
-                  <li><a href="#">Reworked Units</a></li>
-                  <li><a href="#">Time elapsed between status 1</a></li>
-                  <li><a href="#">Time elapsed between status 2</a></li>
-                  <li><a href="#">Day processed against scheduled day</a></li>
+                  <li><a href="#">Reporte de unidades por surtir, surtidas y completas</a></li>
+                  <li><a href="#">Reporte de tiempo transcurrido de surtir a preparado</a></li>
                 </ul>
               </li>
             </ul>

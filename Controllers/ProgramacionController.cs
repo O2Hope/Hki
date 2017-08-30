@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using hki.web.Models;
 using hki.web.Models.Identity;
@@ -6,27 +7,28 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 namespace hki.web.Controllers
 {
-    [Authorize(Roles = "Almacen, Administrador")]
-    public class AlmacenController : Controller
+    [Authorize(Roles = "Programacion, Administrador")]
+    public class ProgramacionController : Controller
     {
-        
         private readonly ApplicationDbContext _context;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AlmacenController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
+        public ProgramacionController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
         }
-        
+
+
         // GET
         public async Task<IActionResult> Index()
         {
@@ -40,18 +42,65 @@ namespace hki.web.Controllers
                 Total = _context.Ordenes.Count(),
                 Ordenes = await _context.Ordenes.OrderByDescending(o => o.Levantamiento).Take(5).ToListAsync()
             };
-            
+
+
 
             return View(modelo);
         }
         
+        public IActionResult NewMo()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> NewMo(
+            [Bind("Dia, Descripcion, ProductoId, ValorHrs, Cantidad, Finalizadas,TotalHrs,Asignado,Ubicacion,FechaReq")]
+            Orden model)
+        {
+
+            model.Asignado = Roles.Produccion;
+            model.Finalizadas = 0;
+            model.TotalHrs = model.ValorHrs * model.Cantidad;
+            model.Levantamiento = DateTime.Now;
+
+            if (!ModelState.IsValid) return View(model);
+
+            _context.Add(model);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+
+        }
+
         public IActionResult Mos()
         {
             var modelo = _context.Ordenes.OrderByDescending(o => o.Levantamiento).ToList();
 
             return View(modelo);
         }
-        
+
+        public async Task<IActionResult> Details(string id)
+        {
+
+            var orden = await _context.Ordenes
+                .SingleOrDefaultAsync(o => o.Id == id);
+
+
+            if (orden == null)
+            {
+                return NotFound();
+            }
+
+            return View(orden);
+        }
+
+        public async Task<IActionResult> Logut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         public async Task<IActionResult> Edit(string id)
         {
             var orden = await _context.Ordenes.SingleOrDefaultAsync(o => o.Id == id);
@@ -86,26 +135,10 @@ namespace hki.web.Controllers
             }
             return View();
         }
-        
-        public async Task<IActionResult> Details(string id)
+
+        public IActionResult Importar()
         {
-
-            var orden = await _context.Ordenes
-                .SingleOrDefaultAsync(o => o.Id == id);
-
-
-            if (orden == null)
-            {
-                return NotFound();
-            }
-
-            return View(orden);
-        }
-        
-        public async Task<IActionResult> Logut()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return View();
         }
     }
 }

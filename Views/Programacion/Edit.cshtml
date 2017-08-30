@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Programacion</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,13 @@
     <link href="~/Board/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Select2 -->
+    <link href="~/Board/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Board/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Board/vendors/starrr/dist/starrr.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="~/Board/build/css/custom.min.css" rel="stylesheet">
@@ -63,17 +70,18 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Production</h3>
+            <h3>Programacion</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
-                <a asp-controller="Produccion" asp-action="Index" ><i class="fa fa-home"></i> Home </a>
+                <a asp-action="Index" ><i class="fa fa-home"></i> Home </a>
               </li>
                   
               <li><a><i class="fa fa-edit"></i> MO'S <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a asp-action="NewMO">New MO</a></li>
                   <li><a asp-action="Mos">All MO'S</a></li>
+                  <li><a asp-action="Importar">Import MO's</a></li>
                 </ul>
               </li>
               <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
@@ -223,7 +231,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Code <span class="required">*</span>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
-                      <input asp-for="ProductoId" readonly="readonly" required="required" class="form-control col-md-7 col-xs-12"  >
+                      <input asp-for="ProductoId" required="required" class="form-control col-md-7 col-xs-12"  >
                     </div>
                   </div>
                   
@@ -231,14 +239,14 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Description 
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Descripcion" readonly="readonly"  class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Descripcion" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Hours/Unit</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="ValorHrs" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="ValorHrs" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
@@ -254,14 +262,14 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Demand Qty<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Cantidad"  required="required" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Cantidad"  required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
+                      <select class="form-control" asp-for="Ubicacion"  asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
                       </select>
                     </div>
                   </div>
@@ -270,7 +278,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Required Date</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
                       <div class="input-group date" id="myDatepicker2">
-                        <input type="text" asp-for="FechaReq" class="form-control" readonly="readonly"/>
+                        <input type="text" asp-for="FechaReq" class="form-control" />
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -290,9 +298,23 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Status 3 
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Estatus3" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Estatus3" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
+                  <div class="form-group">
+                   
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12"> Terminado </label>
+                      
+                      <div class="checkbox col-md-6 col-sm-6 col-xs-12">
+
+                            <input type="checkbox" class="flat"> 
+
+                        </div>
+                        
+                   
+                   
+                      </div>
+            
 
                   
                   <div class="ln_solid"></div>
@@ -327,7 +349,8 @@
         <!-- /footer content -->
 
 
-    <!-- jQuery -->
+  
+  <!-- jQuery -->
     <script src="~/Board/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Board/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -363,7 +386,8 @@
     <script src="~/Board/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="~/Board/vendors/moment/min/moment.min.js"></script>
-    <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="../vendors/switchery/dist/switchery.min.js"></script>
 
     <!-- Custom Theme Scripts -->
   <script src="~/Board/build/js/custom.min.js"></script>

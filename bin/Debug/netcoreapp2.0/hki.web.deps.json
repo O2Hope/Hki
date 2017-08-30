@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "f9cc1ab5802934c2f53b7418a89d770daae97b6d"
+    "signature": "7200f421bd429242881093a89204684563142f0c"
   },
   "compilationOptions": {
     "defines": [
@@ -26,7 +26,8 @@
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.AspNetCore.Mvc.TagHelpers": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
-          "Pomelo.EntityFrameworkCore.MySql": "2.0.0-rtm-10058"
+          "Pomelo.EntityFrameworkCore.MySql": "2.0.0-rtm-10058",
+          "WebApiContrib.Core.Formatter.Csv": "2.0.0"
         },
         "runtime": {
           "hki.web.dll": {}
@@ -3877,6 +3878,17 @@
           "System.Xml.XPath": "4.3.0"
         }
       },
+      "WebApiContrib.Core.Formatter.Csv/2.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/WebApiContrib.Core.Formatter.Csv.dll": {}
+        }
+      },
       "WindowsAzure.Storage/8.1.4": {
         "dependencies": {
           "Microsoft.Data.OData": "5.8.2",
@@ -6104,6 +6116,13 @@
       "sha512": "sha512-jw9oHHEIVW53mHY9PgrQa98Xo2IZ0ZjrpdOTmtvk+Rvg4tq7dydmxdNqUvJ5YwjDqhn75mBXWttWjiKhWP53LQ==",
       "path": "system.xml.xpath.xdocument/4.3.0",
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
+    },
+    "WebApiContrib.Core.Formatter.Csv/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XrZszhmBwgZj08bcN3MMjs53HU2GXzGqkoYL8CHvUuRJGc0GWaPHBlPgYKp3PMUirZms/MvjthMQeD4JMMsm+A==",
+      "path": "webapicontrib.core.formatter.csv/2.0.0",
+      "hashPath": "webapicontrib.core.formatter.csv.2.0.0.nupkg.sha512"
     },
     "WindowsAzure.Storage/8.1.4": {
       "type": "package",
