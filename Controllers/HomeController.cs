@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using hki.web.Models;
@@ -29,6 +30,18 @@ namespace hki.web.Controllers
         [HttpGet] 
         public IActionResult Index()
         {
+
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole(Roles.Almacen.ToString()))
+                {
+                    return RedirectToAction("Index", "Almacen");
+                }
+                if (User.IsInRole(Roles.Produccion.ToString()))
+                {
+                    return RedirectToAction("Index", "Produccion");
+                }
+            }
             return View();
         }
 
@@ -42,7 +55,15 @@ namespace hki.web.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Produccion");
+
+                    if (User.IsInRole(Roles.Almacen.ToString()))
+                    {
+                        return RedirectToAction("Index", "Almacen");
+                    }
+                    if (User.IsInRole(Roles.Produccion.ToString()))
+                    {
+                        return RedirectToAction("Index", "Produccion");
+                    }
                 }
                 else
                 {
@@ -50,7 +71,7 @@ namespace hki.web.Controllers
                 }
             }
 
-            return View();
+            return RedirectToAction("Index","Home");
         }
 
         [Authorize(Roles = "Administrador")]
