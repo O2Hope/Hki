@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "Libuv/1.10.0": {
@@ -12807,7 +12807,8 @@
     ]
   },
   "packageFolders": {
-    "/Users/anaisabel/.nuget/packages/": {}
+    "/Users/anaisabel/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -12815,15 +12816,30 @@
       "projectUniqueName": "/Users/anaisabel/RiderProjects/hki/hki.web/hki.web.csproj",
       "projectName": "hki.web",
       "projectPath": "/Users/anaisabel/RiderProjects/hki/hki.web/hki.web.csproj",
+      "packagesPath": "/Users/anaisabel/.nuget/packages/",
       "outputPath": "/Users/anaisabel/RiderProjects/hki/hki.web/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "/Users/anaisabel/.nuget/NuGet/NuGet.Config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {}
         }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
       }
     },
     "frameworks": {
@@ -12831,7 +12847,8 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0"
+            "version": "2.0.0",
+            "autoReferenced": true
           },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
@@ -12849,7 +12866,12 @@
             "target": "Package",
             "version": "2.0.0"
           }
-        }
+        },
+        "imports": [
+          "net461"
+        ],
+        "assetTargetFallback": true,
+        "warn": true
       }
     }
   }

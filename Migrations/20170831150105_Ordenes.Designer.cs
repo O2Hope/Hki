@@ -12,7 +12,7 @@ using System;
 namespace hki.web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170829160751_Ordenes")]
+    [Migration("20170831150105_Ordenes")]
     partial class Ordenes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,15 +98,47 @@ namespace hki.web.Migrations
 
                     b.Property<string>("ProductoId");
 
+                    b.Property<bool>("Terminado");
+
                     b.Property<float>("TotalHrs");
 
                     b.Property<int>("Ubicacion");
+
+                    b.Property<int>("UltModificacion");
+
+                    b.Property<bool>("Validada");
 
                     b.Property<float>("ValorHrs");
 
                     b.HasKey("Id");
 
                     b.ToTable("Ordenes");
+                });
+
+            modelBuilder.Entity("hki.web.Models.Piezas", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comentarios");
+
+                    b.Property<int>("Estatus");
+
+                    b.Property<string>("Levantamiento");
+
+                    b.Property<string>("OrdenId");
+
+                    b.Property<bool>("Terminado");
+
+                    b.Property<int>("Ubicacion");
+
+                    b.Property<string>("UltimaModificacion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrdenId");
+
+                    b.ToTable("Piezas");
                 });
 
             modelBuilder.Entity("hki.web.Models.Producto", b =>
@@ -229,6 +261,13 @@ namespace hki.web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("hki.web.Models.Piezas", b =>
+                {
+                    b.HasOne("hki.web.Models.Orden", "Orden")
+                        .WithMany()
+                        .HasForeignKey("OrdenId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

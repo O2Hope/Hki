@@ -21,6 +21,8 @@ namespace hki.web.Models
         public DbSet<Orden> Ordenes { get; set; }
 
         public DbSet<Producto> Productos { get; set; }
+
+        public DbSet<Piezas> Piezas { get; set; }
         
     }
 }
