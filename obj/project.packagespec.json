@@ -22,6 +22,10 @@
           "target": "Package",
           "version": "2.0.0"
         },
+        "Gray.Microsoft.AspNetCore.SignalR.Server": {
+          "target": "Package",
+          "version": "0.2.0-alpha1"
+        },
         "Microsoft.AspNetCore.All": {
           "target": "Package",
           "version": "2.0.0"

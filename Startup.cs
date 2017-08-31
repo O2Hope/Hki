@@ -31,6 +31,7 @@ namespace hki.web
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Data Source=SQL5033.myASP.NET;Initial Catalog=DB_A27A42_coep;User Id=DB_A27A42_coep_admin;Password=Agusvaldes1!;"));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<RoleManager<IdentityRole>>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +49,7 @@ namespace hki.web
             app.UseStaticFiles();
             app.UseSession();
             app.UseAuthentication();
+            app.UseSignalR();
 
             app.UseMvc(routes =>
             {
