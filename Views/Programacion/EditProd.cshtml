@@ -1,6 +1,6 @@
 ﻿@using hki.web.Models.Identity
 @using Microsoft.AspNetCore.Identity
-@model Orden
+@model Piezas
 @inject UserManager<ApplicationUser> _user
 
 @{
@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Programacion</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,13 @@
     <link href="~/Board/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Select2 -->
+    <link href="~/Board/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Board/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Board/vendors/starrr/dist/starrr.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="~/Board/build/css/custom.min.css" rel="stylesheet">
@@ -205,7 +212,7 @@
       <div class="">
         <div class="page-title">
           <div class="title_left">
-            <h3>Add new MO</h3>
+            <h3>Edit MO</h3>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -218,10 +225,10 @@
               </div>
               <div class="x_content">
                 <br />
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="NewMO">
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="EditProd">
 
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">MO<span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Code <span class="required">*</span>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                       <input asp-for="Id" required="required" class="form-control col-md-7 col-xs-12"  >
@@ -229,69 +236,41 @@
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Producto<span class="required">*</span>
-                    </label>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                      <input asp-for="ProductoId" required="required" class="form-control col-md-7 col-xs-12"  >
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripcion
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Description 
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Descripcion"  class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Orden" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Hours/Unit</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Levantamiento</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="ValorHrs" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Levantamiento" readonly="readonly" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
+                  
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Dia para produccion</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Estatus</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Dia" asp-items="Html.GetEnumSelectList<hki.web.Models.Dias>()">
+                      <select class="form-control" asp-for="Estatus" asp-items="Html.GetEnumSelectList<hki.web.Models.EstatusP>()">
                       </select>
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad a fabricar<span class="required">*</span>
-                    </label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Comentarios</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Cantidad"  required="required" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Comentarios"  class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ubicacion</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
-                      </select>
-                    </div>
-                  </div>
-                 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de requerimiento</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <div class="input-group date" id="myDatepicker2">
-                        <input type="text" asp-for="FechaReq" class="form-control"/>
-                        <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Validada </label>
+                  <div class="form-group">                   
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Terminado </label>                      
                     <div class="checkbox col-md-6 col-sm-6 col-xs-12">
-                      <input type="checkbox" class="flat" asp-for="Validada"> 
-                    </div>                 
+                      <input type="checkbox" asp-for="Terminado" class="flat"> 
+                    </div>
                   </div>
 
                   
@@ -327,7 +306,8 @@
         <!-- /footer content -->
 
 
-    <!-- jQuery -->
+  
+  <!-- jQuery -->
     <script src="~/Board/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Board/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -363,7 +343,8 @@
     <script src="~/Board/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="~/Board/vendors/moment/min/moment.min.js"></script>
-    <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="../vendors/switchery/dist/switchery.min.js"></script>
 
     <!-- Custom Theme Scripts -->
   <script src="~/Board/build/js/custom.min.js"></script>

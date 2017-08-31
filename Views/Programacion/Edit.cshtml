@@ -265,6 +265,13 @@
                       <input asp-for="Cantidad"  required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Terminadas
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input asp-for="Finalizadas"  class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
                   
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
@@ -301,13 +308,21 @@
                       <input asp-for="Estatus3" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Validada </label>
+                    <div class="checkbox col-md-6 col-sm-6 col-xs-12">
+                      <input type="checkbox" class="flat" asp-for="Validada"> 
+                    </div>                 
+                  </div>
+                  
                   <div class="form-group">
                    
                       <label class="control-label col-md-3 col-sm-3 col-xs-12"> Terminado </label>
                       
                       <div class="checkbox col-md-6 col-sm-6 col-xs-12">
 
-                            <input type="checkbox" class="flat"> 
+                            <input type="checkbox" asp-for="Terminado" class="flat"> 
 
                         </div>
                         

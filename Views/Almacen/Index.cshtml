@@ -381,7 +381,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            H&K International
+            <label id="MessageDisplay"></label>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -391,7 +391,10 @@
 
 
   <!-- jQuery -->
-    <script src="~/Board/vendors/jquery/dist/jquery.min.js"></script>
+  <script src="~/Board/vendors/jquery/dist/jquery.min.js"></script>
+  <!-- SignalR -->
+  <script src="~/lib/signalr/jquery.signalR.min.js" ></script>
+  <script src="Signalr/hubs" ></script>
     <!-- Bootstrap -->
     <script src="~/Board/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -431,6 +434,23 @@
     <!-- Custom Theme Scripts -->
   <script src="~/Board/build/js/custom.min.js"></script>
   
+  <script>
+
+    var myHubProxy = $.connection.hub.createHubProxy("NotificacionesHub");
+
+    myHubProxy.on('clientListener', function(msg) {
+
+      $('#MessageDisplay').append(msg);
+
+    })
+
+    $.connection.hub.start().done(function() {
+
+      myHubProxy.invoke('Notificaciones');
+
+    });
+    
+  </script>
 	
   </body>
 </html>

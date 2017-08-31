@@ -40,7 +40,6 @@ namespace hki.web.Controllers
                 Total = _context.Ordenes.Count(),
                 Ordenes = await _context.Ordenes.OrderByDescending(o => o.Levantamiento).Take(5).ToListAsync()
             };
-            
 
             return View(modelo);
         }

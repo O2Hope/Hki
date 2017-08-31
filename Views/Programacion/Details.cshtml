@@ -1,6 +1,6 @@
 ﻿@using hki.web.Models.Identity
 @using Microsoft.AspNetCore.Identity
-@model Orden
+@model DetailsViewModel
 @inject UserManager<ApplicationUser> _user
 
 @{
@@ -207,147 +207,209 @@
       <!-- /Graph -->
       <div class="row">
 
-                       <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2> Details </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2> Details </h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
 
-                  <div class="x_content">
+            <div class="x_content">
              
-                    <dl class="dl-horizontal">
-                      <dt>
-                        ID
-                      </dt>
+              <dl class="dl-horizontal">
+                <dt>
+                  ID
+                </dt>
 
-                      <dd>
-                        @Model.Id
-                      </dd>
+                <dd>
+                  @Model.Orden.Id
+                </dd>
 
-                      <dt>
-                        Asignado
-                      </dt>
+                <dt>
+                  Asignado
+                </dt>
 
-                      <dd>
-                        @Model.Asignado
-                      </dd>
+                <dd>
+                  @Model.Orden.Asignado
+                </dd>
 
-                      <dt>
-                        Fecha Levantamiento
-                      </dt>
+                <dt>
+                  Fecha Levantamiento
+                </dt>
 
-                      <dd>
-                        @Model.Levantamiento
-                      </dd>
-                      <dt>
-                        Fecha Requerimiento
-                      </dt>
+                <dd>
+                  @Model.Orden.Levantamiento
+                </dd>
+                <dt>
+                  Fecha Requerimiento
+                </dt>
 
-                      <dd>
-                        @Model.FechaReq
-                      </dd>
-                      <dt>
-                        Dia
-                      </dt>
-                      <dd>
-                        @Model.Dia
-                      </dd>
-                      <dt>
-                        Producto
-                      </dt>
-                      <dd>
-                        <table class="table">
-                          <tr>
-                            <th>ID</th>
-                            <th>Descripcion</th>
-                            <th>Valor/Hrs</th>
-                          </tr>
-                          <tr>
-                            <td>
-                              @Model.ProductoId
-                            </td>
-                            <td>
-                              @Model.Descripcion
-                            </td>
-                            <td>
-                              @Model.ValorHrs
-                            </td>
-                          </tr>
+                <dd>
+                  @Model.Orden.FechaReq
+                </dd>
+                <dt>
+                  Dia
+                </dt>
+                <dd>
+                  @Model.Orden.Dia
+                </dd>
+                <dt>
+                  Producto
+                </dt>
+                <dd>
+                  <table class="table">
+                    <tr>
+                      <th>ID</th>
+                      <th>Descripcion</th>
+                      <th>Valor/Hrs</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        @Model.Orden.ProductoId
+                      </td>
+                      <td>
+                        @Model.Orden.Descripcion
+                      </td>
+                      <td>
+                        @Model.Orden.ValorHrs
+                      </td>
+                    </tr>
 
-                        </table>
-                      </dd>
-                      <dt>
-                        Ubicacion
-                      </dt>
-                      <dd>
-                        @Model.Ubicacion
-                      </dd>
-                      <dt>
-                        Cantidad
-                      </dt>
-                      <dd>
-                        @Model.Cantidad Piezas
-                      </dd>
-                      <dt>
-                        Piezas finalizadas
-                      </dt>
-                      <dd>
-                        @Model.Finalizadas Piezas
-                      </dd>
-                      <dt>
-                        Valor Hrs.
-                      </dt>
-                      <dd>
-                        @Model.ValorHrs
-                      </dd>
-                      <dt>
-                        Total Hrs.
-                      </dt>
-                      <dd>
-                        @Model.TotalHrs
-                      </dd>
-                      <dt>
-                        Estatus 2
-                      </dt>
-                      <dd>
-                        @Model.Estatus2
-                      </dd>
-                      <dt>
-                        Estatus 3
-                      </dt>
-                      <dd>
-                        @Model.Estatus3
-                      </dd>
-                    </dl>
+                  </table>
+                </dd>
+                <dt>
+                  Ubicacion
+                </dt>
+                <dd>
+                  @Model.Orden.Ubicacion
+                </dd>
+                <dt>
+                  Cantidad
+                </dt>
+                <dd>
+                  @Model.Orden.Cantidad Piezas
+                </dd>
+                <dt>
+                  Piezas finalizadas
+                </dt>
+                <dd>
+                  @Model.Orden.Finalizadas Piezas
+                </dd>
+                <dt>
+                  Total Hrs.
+                </dt>
+                <dd>
+                  @Model.Orden.TotalHrs
+                </dd>
+                <dt>
+                  Estatus 2
+                </dt>
+                <dd>
+                  @Model.Orden.Estatus2
+                </dd>
+                <dt>
+                  Estatus 3
+                </dt>
+                <dd>
+                  @Model.Orden.Estatus3
+                </dd>
+              </dl>
 							
-                    <a asp-action="Mos">Regresar</a>
+              <a asp-action="Mos">Regresar</a>
 						
-                  </div>
-                </div>
-              </div>
-        
-        
-      </div>
-
             </div>
           </div>
         </div>
+        
+        
+      </div>
+      
+<div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2> Piezas </h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+             
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Pieza</th>
+                  <th>MO</th>
+                  <th>Levantamiento</th>
+                  <th>Estatus</th>
+                  <th>Ultima Modificacion</th>
+                  <th>Ubicacion</th>
+                  <th>Terminado</th>
+                  <th>Comentarios</th>
+                  <th>Editar</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Piezas)
+                {
+                  <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Orden</td>
+                    <td>@item.Levantamiento</td>
+                    <td>@item.Estatus</td>
+                    <td>@item.UltimaModificacion</td>
+                    <th>@item.Ubicacion</th>
+                    <td><input type="checkbox" asp-for="@item.Terminado" readonly="readonly" class="flat"> </td>
+                    <td>@item.Comentarios</td>
+                    <td>
+                      <form>
+                      <button type="submit" asp-action="EditProd" asp-controller="Programacion" asp-route-id="@item.Id" class="btn btn-success">Edit</button>
+                      </form>
+                      </td>
+                  </tr>
+                }
+                </tbody>
+              </table>
+              
+            </div>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+    </div>
+
+      
        
         <!-- /page content -->
 

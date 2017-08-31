@@ -55,19 +55,51 @@ namespace hki.web.Controllers
         
         [HttpPost]
         public async Task<IActionResult> NewMo(
-            [Bind("Dia, Descripcion, ProductoId, ValorHrs, Cantidad, Finalizadas,TotalHrs,Asignado,Ubicacion,FechaReq")]
+            [Bind("Id,Dia, Descripcion, ProductoId, ValorHrs, Cantidad, Finalizadas,TotalHrs,Asignado,Ubicacion,FechaReq, Validada")]
             Orden model)
         {
+            
+            var pieza = new Piezas();
 
             model.Asignado = Roles.Produccion;
             model.Finalizadas = 0;
             model.TotalHrs = model.ValorHrs * model.Cantidad;
             model.Levantamiento = DateTime.Now;
+            model.UltModificacion = Roles.Programacion;
 
             if (!ModelState.IsValid) return View(model);
 
-            _context.Add(model);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Add(model);
+                await _context.SaveChangesAsync();
+
+                
+                for (var i = 0; i < model.Cantidad; i++)
+                {
+                    
+                    pieza.Comentarios = "";
+                    pieza.Estatus = EstatusP.Null;
+                    pieza.Id = i < 9 ? $"{model.Id}-0{ i + 1}" : $"{model.Id}-{ i + 1}";
+                    pieza.Levantamiento = model.Levantamiento.ToString();
+                    pieza.Orden = model.Id ;
+                    pieza.Terminado = false;
+                    pieza.UltimaModificacion = DateTime.Now.ToString();
+                    
+                    _context.Add(pieza);
+                    
+                    await _context.SaveChangesAsync();
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
+            
 
             return RedirectToAction("Index");
 
@@ -83,16 +115,21 @@ namespace hki.web.Controllers
         public async Task<IActionResult> Details(string id)
         {
 
-            var orden = await _context.Ordenes
-                .SingleOrDefaultAsync(o => o.Id == id);
+            var viewModel = new DetailsViewModel
+            {
+                Orden = await _context.Ordenes
+                    .SingleOrDefaultAsync(o => o.Id == id),
+                Piezas = await _context.Piezas
+                    .Where(o => o.Orden == id ).ToListAsync()
+            };
 
 
-            if (orden == null)
+            if (viewModel.Orden == null)
             {
                 return NotFound();
             }
 
-            return View(orden);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Logut()
@@ -116,12 +153,46 @@ namespace hki.web.Controllers
             if (await TryUpdateModelAsync<Orden>(
                 ordenToUpdate,
                 "",
-                o => o.Dia, o => o.Ubicacion, o => o.Estatus2, o => o.Estatus3))
+                o => o.Dia, o => o.Ubicacion, o => o.Estatus2, o => o.Estatus3, o => o.Terminado,o => o.Finalizadas))
             {
                 try
                 {
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Mos));
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                                                 "Try again, and if the problem persists, " +
+                                                 "see your system administrator.");
+                }
+
+
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> EditProd(string id)
+        {
+            var pieza = await _context.Piezas.FirstOrDefaultAsync(p => p.Id == id);
+            return View(pieza);
+        }
+        
+        [HttpPost, ActionName("EditProd")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProdPost(string id)
+        {
+            var ordenToUpdate = await _context.Piezas.SingleOrDefaultAsync(o => o.Id == id);
+            if (await TryUpdateModelAsync<Piezas>(
+                ordenToUpdate,
+                "",
+                o => o.Id, o => o.Estatus, o => o.Orden, o => o.Terminado, o => o.Ubicacion, o => o.Comentarios))
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details));
                 }
                 catch (DbUpdateException /* ex */)
                 {

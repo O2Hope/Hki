@@ -6,7 +6,7 @@ namespace hki.web.Models
     public class Piezas
     {
         public string Id { get; set; }
-        public Orden Orden { get; set; }
+        public string Orden { get; set; }
         public Ubicaciones Ubicacion { get; set; }
         public EstatusP Estatus { get; set; }
         public string Levantamiento { get; set; }

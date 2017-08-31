@@ -125,7 +125,7 @@ namespace hki.web.Migrations
 
                     b.Property<string>("Levantamiento");
 
-                    b.Property<string>("OrdenId");
+                    b.Property<string>("Orden");
 
                     b.Property<bool>("Terminado");
 
@@ -134,8 +134,6 @@ namespace hki.web.Migrations
                     b.Property<string>("UltimaModificacion");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrdenId");
 
                     b.ToTable("Piezas");
                 });
@@ -260,13 +258,6 @@ namespace hki.web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("hki.web.Models.Piezas", b =>
-                {
-                    b.HasOne("hki.web.Models.Orden", "Orden")
-                        .WithMany()
-                        .HasForeignKey("OrdenId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

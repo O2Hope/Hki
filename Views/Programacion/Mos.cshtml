@@ -232,7 +232,7 @@
                       <thead>
                       <tr class="headings">
                         <th class="column-title">Id </th>
-                        <th class="column-title">Asignado </th>
+                        <th class="column-title">Ultima Modificacion</th>
                         <th class="column-title">Producto </th>
                         <th class="column-title">Descripcion</th>
                         <th class="column-title">Levantamiento </th>
@@ -254,13 +254,17 @@
                         <tr class="even pointer">
 
                           <td class=" ">@item.Id</td>
-                          <td class=" ">@item.Asignado</td>
+                          <td class=" ">@item.UltModificacion</td>
                           <td class=" ">@item.ProductoId</td>
                           <td class=" ">@item.Descripcion</td>
                           <td class=" ">@item.Levantamiento</td>
                           <td class=" ">@item.FechaReq</td>
                           <td class=" ">@item.Ubicacion</td>
-                          <td class=" "><a asp-action="Details" asp-route-id="@item.Id">Details</a> | <a asp-action="Edit" asp-route-id="@item.Id" >Edit</a>
+                          <td class=" ">
+                            <form>
+                            <button type="submit" asp-action="Edit" asp-controller="Programacion" asp-route-id="@item.Id" class="btn btn-success">Edit</button>
+                            <button type="submit" asp-action="Details" asp-controller="Programacion" asp-route-id="@item.Id" class="btn btn-primary">Details</button>
+                            </form>
                           </td>
 
                         </tr>
