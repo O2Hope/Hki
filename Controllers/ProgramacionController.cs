@@ -192,7 +192,7 @@ namespace hki.web.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details));
+                    return RedirectToAction(nameof(Mos));
                 }
                 catch (DbUpdateException /* ex */)
                 {

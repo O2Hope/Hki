@@ -1,6 +1,6 @@
 ﻿@using hki.web.Models.Identity
 @using Microsoft.AspNetCore.Identity
-@model Orden
+@model Piezas
 @inject UserManager<ApplicationUser> _user
 
 @{
@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Programacion</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -70,7 +70,7 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Programacion</h3>
+            <h3>Produccion</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
@@ -211,7 +211,7 @@
       <div class="">
         <div class="page-title">
           <div class="title_left">
-            <h3>Edit MO</h3>
+            <h3>Editar Pieza</h3>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -224,13 +224,13 @@
               </div>
               <div class="x_content">
                 <br />
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="Edit">
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="EditProd">
 
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Code <span class="required">*</span>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
-                      <input asp-for="ProductoId" readonly="readonly" required="required" class="form-control col-md-7 col-xs-12"  >
+                      <input asp-for="Id" required="required" class="form-control col-md-7 col-xs-12"  >
                     </div>
                   </div>
                   
@@ -238,97 +238,39 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Description 
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Descripcion" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Orden" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Hours/Unit</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Levantamiento</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="ValorHrs" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Levantamiento" readonly="readonly" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
+                  
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Day For Prodution</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Estatus</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" disabled="disabled" asp-for="Dia" asp-items="Html.GetEnumSelectList<hki.web.Models.Dias>()">
+                      <select class="form-control" asp-for="Estatus" asp-items="Html.GetEnumSelectList<hki.web.Models.EstatusP>()">
                       </select>
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Demand Qty<span class="required">*</span>
-                    </label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Comentarios</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Cantidad" readonly="readonly"  required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Terminadas
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Finalizadas"  class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Comentarios"  class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <select class="form-control" asp-for="Ubicacion"  asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
-                      </select>
-                    </div>
-                  </div>
-                 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Required Date</label>
-                    <div class="col-md-3 col-sm-3 col-xs-4">
-                      <div class="input-group date" id="myDatepicker2">
-                        <input type="text" readonly="readonly" asp-for="FechaReq" class="form-control" />
-                        <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Status 2 
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Estatus2" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Status 3 
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Estatus3" readonly="" class="form-control col-md-7 col-xs-12">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Validada </label>
+                  <div class="form-group">                   
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Terminado </label>                      
                     <div class="checkbox col-md-6 col-sm-6 col-xs-12">
-                      <input type="checkbox" disabled="disabled" class="flat" asp-for="Validada"> 
-                    </div>                 
+                      <input type="checkbox" asp-for="Terminado" class="flat"> 
+                    </div>
                   </div>
-                  
-                  <div class="form-group">
-                   
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12"> Terminado </label>
-                      
-                      <div class="checkbox col-md-6 col-sm-6 col-xs-12">
-
-                            <input type="checkbox" asp-for="Terminado" class="flat"> 
-
-                        </div>
-                        
-                   
-                   
-                      </div>
-            
 
                   
                   <div class="ln_solid"></div>

@@ -50,6 +50,7 @@ namespace hki.web
             app.UseSession();
             app.UseAuthentication();
             app.UseSignalR();
+ 
 
             app.UseMvc(routes =>
             {
