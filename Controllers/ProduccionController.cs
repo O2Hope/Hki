@@ -187,10 +187,12 @@ namespace hki.web.Controllers
         public async Task<IActionResult> EditProdPost(string id)
         {
             var ordenToUpdate = await _context.Piezas.SingleOrDefaultAsync(o => o.Id == id);
+                ordenToUpdate.Surtir = DateTime.Now;
+            
             if (await TryUpdateModelAsync<Piezas>(
                 ordenToUpdate,
                 "",
-                o => o.Id, o => o.Estatus, o => o.Orden, o => o.Terminado, o => o.Ubicacion, o => o.Comentarios))
+                o => o.Surtir, o => o.Comentarios, o => o.Terminado, o => o.Ubicacion, o => o.Estatus))
             {
                 try
                 {
@@ -209,6 +211,7 @@ namespace hki.web.Controllers
             }
             return View();
         }
+       
        
     }
 }

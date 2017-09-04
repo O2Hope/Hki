@@ -12,7 +12,7 @@ using System;
 namespace hki.web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170831194107_Ordenes")]
+    [Migration("20170904223316_Ordenes")]
     partial class Ordenes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,7 +126,15 @@ namespace hki.web.Migrations
 
                     b.Property<string>("Levantamiento");
 
+                    b.Property<string>("Nomina");
+
                     b.Property<string>("Orden");
+
+                    b.Property<DateTime>("Preparado");
+
+                    b.Property<TimeSpan>("Surtido");
+
+                    b.Property<DateTime>("Surtir");
 
                     b.Property<bool>("Terminado");
 

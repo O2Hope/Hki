@@ -227,18 +227,18 @@
                 <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="EditProd">
 
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Code <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Pieza <span class="required">*</span>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
-                      <input asp-for="Id" required="required" class="form-control col-md-7 col-xs-12"  >
+                      <input asp-for="Id" required="required" readonly="readonly" class="form-control col-md-7 col-xs-12"  >
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Description 
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">MO 
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input asp-for="Orden" class="form-control col-md-7 col-xs-12">
+                      <input asp-for="Orden" readonly="readonly" class="form-control col-md-7 col-xs-12">
                     </div>
                   </div>
                   
@@ -250,10 +250,19 @@
                   </div>
                   
                   
+                  
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Estatus</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
                       <select class="form-control" asp-for="Estatus" asp-items="Html.GetEnumSelectList<hki.web.Models.EstatusP>()">
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ubicacion</label>
+                    <div class="col-md-3 col-sm-3 col-xs-4">
+                      <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
                       </select>
                     </div>
                   </div>

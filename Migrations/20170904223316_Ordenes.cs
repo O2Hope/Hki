@@ -43,7 +43,11 @@ namespace hki.web.Migrations
                     Comentarios = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estatus = table.Column<int>(type: "int", nullable: false),
                     Levantamiento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nomina = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Orden = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Preparado = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Surtido = table.Column<TimeSpan>(type: "time", nullable: false),
+                    Surtir = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Terminado = table.Column<bool>(type: "bit", nullable: false),
                     Ubicacion = table.Column<int>(type: "int", nullable: false),
                     UltimaModificacion = table.Column<string>(type: "nvarchar(max)", nullable: true)

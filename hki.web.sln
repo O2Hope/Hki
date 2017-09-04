@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 15.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hki.web", "hki.web.csproj", "{FA8CFE19-FFC8-4AB4-8949-7AC54BBB0430}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA8CFE19-FFC8-4AB4-8949-7AC54BBB0430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8CFE19-FFC8-4AB4-8949-7AC54BBB0430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8CFE19-FFC8-4AB4-8949-7AC54BBB0430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8CFE19-FFC8-4AB4-8949-7AC54BBB0430}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

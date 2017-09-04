@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace hki.web.Models
@@ -8,6 +9,10 @@ namespace hki.web.Models
         public string Id { get; set; }
         public string Orden { get; set; }
         public Ubicaciones Ubicacion { get; set; }
+        public string Nomina { get; set; }
+        public DateTime Surtir { get; set; }
+        public DateTime Preparado { get; set; }
+        public TimeSpan Surtido { get; set; }
         public EstatusP Estatus { get; set; }
         public string Levantamiento { get; set; }
         public string UltimaModificacion { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using hki.web.Models;
 using hki.web.Models.Identity;
@@ -89,16 +90,66 @@ namespace hki.web.Controllers
         public async Task<IActionResult> Details(string id)
         {
 
-            var orden = await _context.Ordenes
-                .SingleOrDefaultAsync(o => o.Id == id);
+            var viewModel = new DetailsViewModel
+            {
+                Orden = await _context.Ordenes
+                    .SingleOrDefaultAsync(o => o.Id == id),
+                Piezas = await _context.Piezas
+                    .Where(o => o.Orden == id ).ToListAsync()
+            };
 
 
-            if (orden == null)
+            if (viewModel.Orden == null)
             {
                 return NotFound();
             }
 
-            return View(orden);
+            return View(viewModel);
+        }
+        
+        public async Task<IActionResult> EditProd(string id)
+        {
+            var model = await _context.Piezas.FirstOrDefaultAsync(p => p.Id == id);
+
+            
+
+
+            if (model.Surtido <= TimeSpan.Zero)
+            model.Surtido =
+                model.Estatus == EstatusP.Surtir ? DateTime.Now - model.Surtir : TimeSpan.Zero;
+            
+            return View(model);
+        }
+        
+        [HttpPost, ActionName("EditProd")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProdPost(string id)
+        {
+            var ordenToUpdate = await _context.Piezas.SingleOrDefaultAsync(o => o.Id == id);
+
+                ordenToUpdate.Preparado = DateTime.Now;
+            
+            if (await TryUpdateModelAsync<Piezas>(
+                ordenToUpdate,
+                "",
+                o => o.Id, o => o.Estatus, o => o.Orden, o => o.Terminado, o => o.Ubicacion, o => o.Comentarios, o => o.Nomina, o => o.Preparado, o => o.Surtido))
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Mos));
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                                                 "Try again, and if the problem persists, " +
+                                                 "see your system administrator.");
+                }
+
+
+            }
+            return View();
         }
         
         public async Task<IActionResult> Logut()

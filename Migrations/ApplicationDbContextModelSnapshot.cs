@@ -125,7 +125,15 @@ namespace hki.web.Migrations
 
                     b.Property<string>("Levantamiento");
 
+                    b.Property<string>("Nomina");
+
                     b.Property<string>("Orden");
+
+                    b.Property<DateTime>("Preparado");
+
+                    b.Property<TimeSpan>("Surtido");
+
+                    b.Property<DateTime>("Surtir");
 
                     b.Property<bool>("Terminado");
 

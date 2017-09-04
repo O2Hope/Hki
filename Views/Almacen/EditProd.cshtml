@@ -1,6 +1,6 @@
 ﻿@using hki.web.Models.Identity
 @using Microsoft.AspNetCore.Identity
-@model DetailsViewModel
+@model Piezas
 @inject UserManager<ApplicationUser> _user
 
 @{
@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>H&KI - Produccion</title>
+    <title>H&KI - Almacen</title>
 
     <!-- Bootstrap -->
     <link href="~/Board/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,13 @@
     <link href="~/Board/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Select2 -->
+    <link href="~/Board/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Board/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Board/vendors/starrr/dist/starrr.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="~/Board/build/css/custom.min.css" rel="stylesheet">
@@ -63,7 +70,7 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Produccion</h3>
+            <h3>Almacen</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
@@ -72,7 +79,6 @@
                   
               <li><a><i class="fa fa-edit"></i> MO'S <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a asp-action="NewMO">New MO</a></li>
                   <li><a asp-action="Mos">All MO'S</a></li>
                 </ul>
               </li>
@@ -87,7 +93,6 @@
               </li>
             </ul>
           </div>
-        </div>
         </div>
         <!-- /sidebar menu -->
 
@@ -202,221 +207,108 @@
 
     <!-- page content -->
     <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Editar Pieza</h3>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Details</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <br />
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="EditProd">
 
-      <!-- /Graph -->
-      <div class="row">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Pieza <span class="required">*</span>
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                      <input asp-for="Id" required="required" class="form-control col-md-7 col-xs-12"  >
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">MO 
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input asp-for="Orden" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Levantamiento</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input asp-for="Levantamiento" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Surtir desde</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input asp-for="Surtido" readonly="readonly" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Estatus</label>
+                    <div class="col-md-3 col-sm-3 col-xs-4">
+                      <select class="form-control" asp-for="Estatus" asp-items="Html.GetEnumSelectList<hki.web.Models.EstatusP>()">
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Proceso que recoge</label>
+                    <div class="col-md-3 col-sm-3 col-xs-4">
+                      <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nomina que recoge 
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input asp-for="Nomina" class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Comentarios</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input asp-for="Comentarios"  class="form-control col-md-7 col-xs-12">
+                    </div>
+                  </div>
 
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2> Details </h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
-                    </li>
-                    <li><a href="#">Settings 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
+                  
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                      <button class="btn btn-primary" type="reset">Reset</button>
+                      <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                  </div>
 
-            <div class="x_content">
-             
-              <dl class="dl-horizontal">
-                <dt>
-                  ID
-                </dt>
-
-                <dd>
-                  @Model.Orden.Id
-                </dd>
-
-                <dt>
-                  Asignado
-                </dt>
-
-                <dd>
-                  @Model.Orden.Asignado
-                </dd>
-
-                <dt>
-                  Fecha Levantamiento
-                </dt>
-
-                <dd>
-                  @Model.Orden.Levantamiento
-                </dd>
-                <dt>
-                  Fecha Requerimiento
-                </dt>
-
-                <dd>
-                  @Model.Orden.FechaReq
-                </dd>
-                <dt>
-                  Dia
-                </dt>
-                <dd>
-                  @Model.Orden.Dia
-                </dd>
-                <dt>
-                  Producto
-                </dt>
-                <dd>
-                  <table class="table">
-                    <tr>
-                      <th>ID</th>
-                      <th>Descripcion</th>
-                      <th>Valor/Hrs</th>
-                    </tr>
-                    <tr>
-                      <td>
-                        @Model.Orden.ProductoId
-                      </td>
-                      <td>
-                        @Model.Orden.Descripcion
-                      </td>
-                      <td>
-                        @Model.Orden.ValorHrs
-                      </td>
-                    </tr>
-
-                  </table>
-                </dd>
-                <dt>
-                  Ubicacion
-                </dt>
-                <dd>
-                  @Model.Orden.Ubicacion
-                </dd>
-                <dt>
-                  Cantidad
-                </dt>
-                <dd>
-                  @Model.Orden.Cantidad Piezas
-                </dd>
-                <dt>
-                  Piezas finalizadas
-                </dt>
-                <dd>
-                  @Model.Orden.Finalizadas Piezas
-                </dd>
-                <dt>
-                  Total Hrs.
-                </dt>
-                <dd>
-                  @Model.Orden.TotalHrs
-                </dd>
-                <dt>
-                  Validada
-                </dt>
-                <dd>
-                  @Model.Orden.Validada
-                </dd>
-                <dt>
-                  Estatus 2
-                </dt>
-                <dd>
-                  @Model.Orden.Estatus2
-                </dd>
-                <dt>
-                  Estatus 3
-                </dt>
-                <dd>
-                  @Model.Orden.Estatus3
-                </dd>
-              </dl>
-							
-              <a asp-action="Mos">Regresar</a>
-						
+                </form>
+              </div>
             </div>
           </div>
         </div>
-        
-        
       </div>
-      
-    <div class="row" >
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2> Piezas </h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
-                  </li>
-                  <li><a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="x_content">
-            <div class="table-responsive">
-              <table id="datatable-buttons" class="table table-striped table-bordered">
-                <thead>
-                <tr class="headings">
-                  <th>Pieza</th>
-                  <th>MO</th>
-                  <th>Levantamiento</th>
-                  <th>Estatus</th>
-                  <th>Ultima Modificacion</th>
-                  <th>Ubicacion</th>
-                  <th>Terminado</th>
-                  <th>Comentarios</th>
-                  <th>Editar</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var item in Model.Piezas)
-                {
-                  <tr class="even pointer">
-                    <td>@item.Id</td>
-                    <td>@item.Orden</td>
-                    <td>@item.Levantamiento</td>
-                    <td>@item.Estatus</td>
-                    <td>@item.UltimaModificacion</td>
-                    <th>@item.Ubicacion</th>
-                    <td><input type="checkbox" asp-for="@item.Terminado" readonly="readonly" class="flat"> </td>
-                    <td>@item.Comentarios</td>
-                    <td>
-                      <form>
-                        <button type="submit" asp-action="EditProd" asp-route-id="@item.Id" class="btn btn-success">Surtir</button>
-                      </form>
-                    </td>
-                  </tr>
-                }
-                </tbody>
-              </table>
-            </div>
-              
-          </div>
-        </div>
-        
-      </div>
-      </div>
-
+    </div>
+    
     </div>
     </div>
-
-      
-       
+        
+        
         <!-- /page content -->
 
         <!-- footer content -->
@@ -429,7 +321,8 @@
         <!-- /footer content -->
 
 
-    <!-- jQuery -->
+  
+  <!-- jQuery -->
     <script src="~/Board/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="~/Board/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -465,27 +358,44 @@
     <script src="~/Board/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="~/Board/vendors/moment/min/moment.min.js"></script>
-    <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="~/Board/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="../vendors/switchery/dist/switchery.min.js"></script>
 
     <!-- Custom Theme Scripts -->
   <script src="~/Board/build/js/custom.min.js"></script>
   
-  <!-- Datatables -->
-  <script src="~/Board/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="~/Board/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-  <script src="~/Board/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  <script src="~/Board/vendors/jszip/dist/jszip.min.js"></script>
-  <script src="~/Board/vendors/pdfmake/build/pdfmake.min.js"></script>
-  <script src="~/Board/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <script src="~/Board/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+  <script>
+    $('#myDatepicker').datetimepicker();
+    
+    $('#myDatepicker2').datetimepicker({
+      format: 'DD/MM/YYYY'
+    });
+    
+    $('#myDatepicker3').datetimepicker({
+      format: 'hh:mm A'
+    });
+    
+    $('#myDatepicker4').datetimepicker({
+      ignoreReadonly: true,
+      allowInputToggle: true
+    });
+
+    $('#datetimepicker6').datetimepicker();
+    
+    $('#datetimepicker7').datetimepicker({
+      useCurrent: false
+    });
+    
+    $("#datetimepicker6").on("dp.change", function(e) {
+      $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    });
+    
+    $("#datetimepicker7").on("dp.change", function(e) {
+      $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    });
+  </script>
 	
   </body>
 </html>
