@@ -80,7 +80,7 @@ namespace hki.web.Controllers
                     
                     pieza.Comentarios = "";
                     pieza.Estatus = EstatusP.Null;
-                    pieza.Id = i < 9 ? $"{model.Id}-0{ i + 1}" : $"{model.Id}-{ i + 1}";
+                    pieza.Id = i < 9 ? $"{model.Id}-0{ i + 1}" : $"{model.Id}-{i + 1}";
                     pieza.Levantamiento = model.Levantamiento.ToString();
                     pieza.Orden = model.Id ;
                     pieza.Terminado = false;
@@ -101,7 +101,7 @@ namespace hki.web.Controllers
             
             
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Mos");
 
         }
 
@@ -149,11 +149,14 @@ namespace hki.web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPOst(string id)
         {
+            
             var ordenToUpdate = await _context.Ordenes.SingleOrDefaultAsync(o => o.Id == id);
+            ordenToUpdate.UltModificacion = Roles.Programacion;
             if (await TryUpdateModelAsync<Orden>(
                 ordenToUpdate,
                 "",
-                o => o.Dia, o => o.Ubicacion, o => o.Estatus2, o => o.Estatus3, o => o.Terminado,o => o.Finalizadas))
+                o => o.Dia, o => o.Ubicacion, o => o.Estatus2, o => o.Estatus3, o => o.Terminado,o => o.Finalizadas,
+                o => o.Validada, o => o.UltModificacion))
             {
                 try
                 {

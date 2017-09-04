@@ -63,7 +63,7 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>Production</h3>
+            <h3>Produccion</h3>
             <ul class="nav side-menu">
               <!-- Inicio -->
               <li>
@@ -220,7 +220,15 @@
                 <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" asp-action="NewMO">
 
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Code <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">MO<span class="required">*</span>
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                      <input asp-for="Id" required="required" class="form-control col-md-7 col-xs-12"  >
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Producto<span class="required">*</span>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                       <input asp-for="ProductoId" required="required" class="form-control col-md-7 col-xs-12"  >
@@ -228,7 +236,7 @@
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Description 
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripcion
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <input asp-for="Descripcion"  class="form-control col-md-7 col-xs-12">
@@ -243,7 +251,7 @@
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Day For Prodution</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Dia para produccion</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
                       <select class="form-control" asp-for="Dia" asp-items="Html.GetEnumSelectList<hki.web.Models.Dias>()">
                       </select>
@@ -251,7 +259,7 @@
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Demand Qty<span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Cantidad a fabricar<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <input asp-for="Cantidad"  required="required" class="form-control col-md-7 col-xs-12">
@@ -259,7 +267,7 @@
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Location</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ubicacion</label>
                     <div class="col-md-3 col-sm-3 col-xs-4">
                       <select class="form-control" asp-for="Ubicacion" asp-items="Html.GetEnumSelectList<hki.web.Models.Ubicaciones>()">
                       </select>
@@ -267,15 +275,22 @@
                   </div>
                  
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Required Date</label>
-                  <div class="col-md-3 col-sm-3 col-xs-4">
-                    <div class="input-group date" id="myDatepicker2">
-                      <input type="text" asp-for="FechaReq" class="form-control"/>
-                      <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de requerimiento</label>
+                    <div class="col-md-3 col-sm-3 col-xs-4">
+                      <div class="input-group date" id="myDatepicker2">
+                        <input type="text" asp-for="FechaReq" class="form-control"/>
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Validada </label>
+                    <div class="checkbox col-md-6 col-sm-6 col-xs-12">
+                      <input type="checkbox" class="flat" disabled="disabled" asp-for="Validada"> 
+                    </div>                 
                   </div>
 
                   

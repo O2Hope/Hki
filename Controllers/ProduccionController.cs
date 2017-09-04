@@ -56,21 +56,53 @@ namespace hki.web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> NewMo(
-            [Bind("Dia, Descripcion, ProductoId, ValorHrs, Cantidad, Finalizadas,TotalHrs,Asignado,Ubicacion,FechaReq")]
+            [Bind("Id,Dia, Descripcion, ProductoId, ValorHrs, Cantidad, Finalizadas,TotalHrs,Asignado,Ubicacion,FechaReq, Validada")]
             Orden model)
         {
+            
+            var pieza = new Piezas();
 
             model.Asignado = Roles.Produccion;
             model.Finalizadas = 0;
             model.TotalHrs = model.ValorHrs * model.Cantidad;
             model.Levantamiento = DateTime.Now;
+            model.UltModificacion = Roles.Programacion;
 
             if (!ModelState.IsValid) return View(model);
 
-            _context.Add(model);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Add(model);
+                await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+                
+                for (var i = 0; i < model.Cantidad; i++)
+                {
+                    
+                    pieza.Comentarios = "";
+                    pieza.Estatus = EstatusP.Null;
+                    pieza.Id = i < 9 ? $"{model.Id}-0{ i + 1}" : $"{model.Id}-{i + 1}";
+                    pieza.Levantamiento = model.Levantamiento.ToString();
+                    pieza.Orden = model.Id ;
+                    pieza.Terminado = false;
+                    pieza.UltimaModificacion = DateTime.Now.ToString();
+                    
+                    _context.Add(pieza);
+                    
+                    await _context.SaveChangesAsync();
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
+            
+
+            return RedirectToAction("Mos");
 
         }
 
@@ -120,6 +152,7 @@ namespace hki.web.Controllers
         public async Task<IActionResult> EditPOst(string id)
         {
             var ordenToUpdate = await _context.Ordenes.SingleOrDefaultAsync(o => o.Id == id);
+            ordenToUpdate.UltModificacion = Roles.Produccion;
             if (await TryUpdateModelAsync<Orden>(
                 ordenToUpdate,
                 "",

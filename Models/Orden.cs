@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using hki.web.Models.Identity;
 
 namespace hki.web.Models
@@ -40,6 +41,8 @@ namespace hki.web.Models
 
     public enum Ubicaciones
     {
+        [Display(Name = "Sin Ubicacion")]
+        Nulo,
         Soldadura,
         Acabado,
         Limpieza,

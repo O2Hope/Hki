@@ -238,6 +238,7 @@
                         <th class="column-title">Levantamiento </th>
                         <th class="column-title">Fecha Requerimiento</th>
                         <th class="column-title">Ubicacion </th>
+                        <th class="column-title">Validada </th>
 
 
                         <th class="column-title no-link last"><span class="nobr">Acciones</span>
@@ -258,6 +259,8 @@
                           <td class=" ">@item.Levantamiento</td>
                           <td class=" ">@item.FechaReq</td>
                           <td class=" ">@item.Ubicacion</td>
+                          <td class=" ">@item.Validada</td>
+
                           <td class=" ">
                             <form>
                             <button type="submit" asp-action="Edit" asp-controller="Programacion" asp-route-id="@item.Id" class="btn btn-success">Edit</button>

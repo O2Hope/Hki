@@ -59,7 +59,7 @@ namespace hki.web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             
-           CreateRoles(serviceProvider).Wait();
+           //CreateRoles(serviceProvider).Wait();
         }
  
         //Creacion de Roles
